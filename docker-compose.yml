@@ -1,0 +1,14 @@
+# Gunakan base image JDK 21 (sesuai error sebelumnya)
+FROM eclipse-temurin:21-jdk-alpine
+  
+  # Direktori kerja di container
+WORKDIR /app
+  
+  # Salin file JAR hasil build Maven/Gradle
+COPY target/*.jar app.jar
+  
+  # Port yang digunakan aplikasi
+EXPOSE 8080
+  
+  # Perintah untuk menjalankan aplikasi
+ENTRYPOINT ["java", "-jar", "app.jar"]
