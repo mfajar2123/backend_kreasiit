@@ -10,6 +10,7 @@ COPY src src
 
 # Build
 RUN ./mvnw -B -DskipTests clean package
+RUN ./mvnw -B -e -X clean package  # Tambahkan flags -e (error) dan -X (debug)
 
 # Jalankanchmod +x mvnw
 EXPOSE 8080
