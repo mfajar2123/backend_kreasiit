@@ -1,13 +1,16 @@
-# Gunakan JDK 21
 FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
-# Salin seluruh proyek termasuk mvnw dan pom.xml
-COPY . .
+# Salin file dengan izin eksekusi untuk mvnw
+COPY --chmod=+x mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
 
-# Build aplikasi dengan Maven
+# Build
 RUN ./mvnw -B -DskipTests clean package
 
-# Jalankan aplikasi
+# Jalankanchmod +x mvnw
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "target/website-fajar-0.0.1-SNAPSHOT.jar"]
